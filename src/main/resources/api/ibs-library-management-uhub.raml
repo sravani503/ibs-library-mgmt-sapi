@@ -1,0 +1,82 @@
+#%RAML 1.0
+title: ibs-library-management-uhub
+version: 1.0
+baseUri: www.klarttechnologies.com
+mediaType: 
+ application/json
+protocols:
+  - HTTP
+
+traits:
+  headerdetails: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/common-headers/1.0.0/common-headers.raml
+  queryP: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/queryparams-traits/1.0.0/queryparams-traits.raml
+
+types:
+  error-Details: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/common-error-response/1.0.1/common-error-response.raml
+  201-res: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/201-response/1.0.0/201-response.raml
+  createBookReq: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/create-new-book-input/1.0.2/create-new-book-request.raml
+  getLibraries: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/getlibrary-by-id/1.0.1/getlibrary-by-id.raml
+  getLibraryRes: !include /exchange_modules/561eb733-84f7-4bbf-9b9a-a2f1a0fccf08/listlibraries-response/1.0.0/listlibraries-response.raml
+
+/Libraries:
+  get:
+    is:
+      headerdetails
+    responses:
+      200:
+        body:
+          application/json:
+            type: getLibraries
+/Libraries{LibraryId}:
+  get:
+    is:
+      headerdetails
+    responses:
+      200:
+        body:
+          application/json:
+            type: getLibraryRes
+      404:
+        body:
+          application/json:
+            type: error-Details
+/books:
+  post:
+    description: The resource is used to add a new book into the database
+    is:
+      - headerdetails
+    body:
+      application/json:
+        description: This is request body section of this create book method or resource
+        type: createBookReq
+    responses:
+      201:
+        body:
+          application/json:
+            type: 201-res
+           
+      404:
+        body:
+          application/json:
+            type: error-Details
+            
+  get:
+    description: to get book details based on query parameter rating
+    is:
+      - headerdetails
+      - queryP
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include /example/get-book-info-based-rating.json
+            
+
+       
+  
+        
+      
+
+            
+                
+      

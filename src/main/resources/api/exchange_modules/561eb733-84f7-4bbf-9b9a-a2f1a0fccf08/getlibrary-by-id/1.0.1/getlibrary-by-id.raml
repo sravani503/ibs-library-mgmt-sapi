@@ -1,0 +1,48 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  libraryCode:
+    type: string
+    example: IBS111
+  Address:
+    type: string
+    example: Road number 3, Secunderabad-500081
+  phoneNumber:
+    type: integer
+    example: 1234567890
+  emailAddress:
+    type: string
+    example: test@gmail.com
+  books:
+    type: array
+    items:
+      properties:
+        bookCode:
+          type: string
+          example: BK234
+        title:
+          type: string
+          example: vennello Aadapilla
+        author:
+          type: string
+          example: Yandamuri
+        bookCategory:
+          type: string
+          example: suspence
+        readCategory:
+          type: integer
+          example: 20
+        rentalPrice:
+          type: integer
+          example: 500
+        rating:
+          type: integer
+          example: 4
+        bestSeller:
+          type: string
+          example: no
+        
+
+
+  
+              
